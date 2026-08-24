@@ -22,10 +22,13 @@ provider "openstack" {
 ############################
 
 locals {
-  app_name           = "pgadmin"
-  flavor             = "gp1.small"
-  key_pair           = ""
-  enable_floating_ip = true
+  app_name = "pgadmin"
+  flavor   = "gp1.small"
+  key_pair = ""
+
+  # Addresses are publicly routed, so the fixed address is reachable
+  # on its own - and a floating IP cannot be attached.
+  enable_floating_ip = false
 }
 
 data "openstack_images_image_v2" "image" {
