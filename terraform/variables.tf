@@ -22,7 +22,9 @@ variable "image_name" {
 variable "network_uuid" {
   description = "UUID des internen Netzwerks @openstack:network:id"
   type        = string
-  default     = "34a00b87-57ce-42c4-8e1b-9ea8a657ec2e"
+  # DHBWV6: dual-stack (v4+v6 auf demselben Subnetz-Paar) — jede VM
+  # bekommt automatisch beide Fixed-IPs von Neutron.
+  default = "9b579624-d844-4df3-b38d-89978b31d37d"
 }
 
 variable "floating_ip_pool" {
