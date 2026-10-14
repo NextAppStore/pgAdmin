@@ -10,7 +10,7 @@ packer {
 locals {
   cloud                   = "openstack"
   provision_script        = "scripts/provision.sh"
-  source_image_name       = "Ubuntu 22.04"
+  source_image_name       = "Ubuntu 24.04"
   flavor                  = "gp1.small"
   ssh_username            = "ubuntu"
   ssh_timeout             = "20m"
@@ -29,9 +29,13 @@ source "openstack" "image" {
   use_blockstorage_volume = local.use_blockstorage_volume
   volume_size             = local.volume_size
   use_floating_ip         = local.use_floating_ip
-  ssh_ip_version          = "4"
-  ssh_timeout             = local.ssh_timeout
-  ssh_username            = local.ssh_username
+  # DHBWV6 is dual-stack; without an explicit version Packer prefers the
+  # IPv4 address. The DHBW VPN only routes IPv6 (2001:7c0:1b20::/48) to
+  # the build host, no route into the 10.200.x.x net - so IPv6 must be
+  # forced for local builds over VPN to reach SSH at all.
+  ssh_ip_version = "6"
+  ssh_timeout    = local.ssh_timeout
+  ssh_username   = local.ssh_username
 }
 
 build {

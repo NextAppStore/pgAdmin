@@ -6,11 +6,16 @@ variable "image_name" {
 variable "networks" {
   type        = list(string)
   description = "@openstack:network:id:list Build networks"
-  default     = ["4971e080-966d-485e-a161-3e2b7fefad53"]
+  # DHBWV6 — same default choice as terraform/variables.tf's network_uuid;
+  # the previous ID no longer exists in this OpenStack project.
+  default = ["9b579624-d844-4df3-b38d-89978b31d37d"]
 }
 
 variable "security_groups" {
   type        = list(string)
   description = "@openstack:security_group:id:list Build security groups"
-  default     = ["4ffaf007-df66-4250-9118-1bd99378d34a"]
+  # appstore-insides — allows SSH (22) ingress v4+v6; the previous ID
+  # no longer exists in this OpenStack project and failed every Packer
+  # build with "Unable to find security_group" without a wizard override.
+  default = ["934851d7-90a2-42ab-927c-fae610697fc7"]
 }
