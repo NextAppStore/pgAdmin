@@ -30,11 +30,11 @@ variable "network_uuid" {
 variable "floating_ip_pool" {
   description = "Name des External Networks für Floating IPs @openstack:floating_ip_pool:name"
   type        = string
-  default     = "DHBW"
+  default     = "DHBWV6"
 }
 
 variable "shared_secgroup_id" {
   description = "ID der gemeinsamen Security Group für alle VMs @openstack:security_group:id"
   type        = string
-  default     = "4ffaf007-df66-4250-9118-1bd99378d34a"
+  default     = "934851d7-90a2-42ab-927c-fae610697fc7"
 }
