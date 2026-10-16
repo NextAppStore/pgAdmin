@@ -29,11 +29,11 @@ source "openstack" "image" {
   use_blockstorage_volume = local.use_blockstorage_volume
   volume_size             = local.volume_size
   use_floating_ip         = local.use_floating_ip
-  # DHBWV6 is dual-stack; without an explicit version Packer prefers the
-  # IPv4 address. The DHBW VPN only routes IPv6 (2001:7c0:1b20::/48) to
-  # the build host, no route into the 10.200.x.x net - so IPv6 must be
-  # forced for local builds over VPN to reach SSH at all.
-  ssh_ip_version = "6"
+  # Packer builds run from the worker, which itself sits inside OpenStack
+  # rather than connecting over the DHBW VPN - the v4 10.200.x.x network
+  # is directly reachable from there. Explicit v4 because DHBWV6 is
+  # dual-stack and Packer would otherwise pick a family at random.
+  ssh_ip_version = "4"
   ssh_timeout    = local.ssh_timeout
   ssh_username   = local.ssh_username
 }
