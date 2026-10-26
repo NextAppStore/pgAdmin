@@ -16,7 +16,7 @@
 output "user_accounts" {
   description = "[CONTRACT] User accounts - Struktur siehe Kommentar oben"
   value       = local.user_accounts
-  sensitive   = true # Enthält Passwörter
+  sensitive   = true # Contains passwords
 }
 
 ############################

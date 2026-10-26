@@ -1,5 +1,5 @@
 ########################################
-# Pflicht-Variablen (vom Worker injiziert)
+# REQUIRED variables (injected by the worker)
 ########################################
 
 variable "users" {
@@ -16,14 +16,14 @@ variable "image_name" {
 }
 
 ########################################
-# Konfigurierbare Variablen (vom Deployer gesetzt)
+# Configurable variables (set by the deployer)
 ########################################
 
 variable "network_uuid" {
   description = "UUID des internen Netzwerks @openstack:network:id"
   type        = string
-  # DHBWV6: dual-stack (v4+v6 auf demselben Subnetz-Paar) — jede VM
-  # bekommt automatisch beide Fixed-IPs von Neutron.
+  # DHBWV6: dual-stack (v4+v6 on the same subnet pair) — every VM
+  # automatically gets both fixed IPs from Neutron.
   default = "9b579624-d844-4df3-b38d-89978b31d37d"
 }
 
